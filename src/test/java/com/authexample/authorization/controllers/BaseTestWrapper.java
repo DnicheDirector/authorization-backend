@@ -43,7 +43,7 @@ public class BaseTestWrapper {
   }
 
   private  <T> HttpEntity<T> generateWithJwtToken(T body, Account account){
-    String token = jwtTokenProvider.createToken(account.getLogin(), account.getRole());
+    String token = jwtTokenProvider.createToken(account.getLogin(), account.getRoles());
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);

@@ -6,6 +6,7 @@ import com.authexample.authorization.services.authentication.AccountToken;
 import com.authexample.authorization.services.authentication.AuthenticationService;
 import com.authexample.authorization.views.AccountInputViewModel;
 import com.authexample.authorization.views.AccountOutputViewModel;
+import com.authexample.authorization.views.MultiServiceAccountViewModel;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -33,11 +34,22 @@ public class AuthenticationController {
   }
 
   @GetMapping("security/authentication-principal")
-  @PreAuthorize("hasAuthority('READ')")
+  @PreAuthorize("hasAuthority('READ_INVOICE_PERMISSION')")
   @ResponseStatus(HttpStatus.OK)
   public AccountOutputViewModel authenticationPrincipal(){
     Account account = authenticationService.getPrincipal();
     return accountMapper.toDTO(account);
+  }
+
+  @GetMapping("security/multi-service-principal")
+  @PreAuthorize("hasAuthority('READ_INVOICE_PERMISSION')")
+  @ResponseStatus(HttpStatus.OK)
+  public MultiServiceAccountViewModel multiServicePrincipal(){
+    Account account = authenticationService.getPrincipal();
+    return new MultiServiceAccountViewModel(
+        accountMapper.toDTO(account),
+        account.getAvailableFields()
+    );
   }
 
   @PostMapping("security/logout")

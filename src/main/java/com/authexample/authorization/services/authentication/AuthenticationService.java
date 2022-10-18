@@ -33,12 +33,12 @@ public class AuthenticationService {
           .orElseThrow(()-> new UsernameNotFoundException("Account with such email doesn't exists"));
 
       authenticationManager.authenticate(
-          new UsernamePasswordAuthenticationToken(email, password, account.getRole().getAuthorities())
+          new UsernamePasswordAuthenticationToken(email, password, account.getAuthorities())
       );
 
       return new AccountToken(
           accountMapper.toDTO(account),
-          jwtTokenProvider.createToken(email, account.getRole())
+          jwtTokenProvider.createToken(email, account.getRoles())
       );
     }
     catch (AuthenticationException e) {

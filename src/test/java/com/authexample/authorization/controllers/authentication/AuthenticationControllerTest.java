@@ -34,7 +34,7 @@ public class AuthenticationControllerTest extends BaseTestWrapper {
     account = Account.builder()
         .login("example@gmail.com")
         .password(passwordEncoder.encode(password))
-        .name("example")
+        .firstName("example")
         .build();
     account.enableAccount();
   }

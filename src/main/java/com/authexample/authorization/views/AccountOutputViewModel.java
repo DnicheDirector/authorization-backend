@@ -1,6 +1,6 @@
 package com.authexample.authorization.views;
 
-import com.authexample.authorization.models.Role;
+import java.util.Set;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 public class AccountOutputViewModel {
   private UUID id;
   private String login;
-  private String name;
-  private Role role;
+  private String email;
+  private String firstName;
+  private String lastName;
+  private Set<RoleViewModel> roles;
+  private Set<AccountGroupViewModel> groups;
 }

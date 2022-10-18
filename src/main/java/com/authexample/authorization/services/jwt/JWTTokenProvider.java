@@ -8,6 +8,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import lombok.Getter;
@@ -39,9 +40,9 @@ public class JWTTokenProvider {
     secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
   }
 
-  public String createToken(String username, Role role) {
+  public String createToken(String username, Set<Role> roles) {
     Claims claims = Jwts.claims().setSubject(username);
-    claims.put("role", role.name());
+    claims.put("roles", roles);
 
     Date now = new Date();
     Date validity = new Date(now.getTime() + validityInSeconds * 1000);

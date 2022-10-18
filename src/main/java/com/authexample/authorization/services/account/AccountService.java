@@ -30,7 +30,7 @@ public class AccountService {
       Account newAccount = Account.builder()
           .login(login)
           .password(passwordEncoder.encode(password))
-          .name(name)
+          .firstName(name)
           .build();
 
       newAccount.enableAccount();
